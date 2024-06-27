@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Select a cell
     function selectCell(cell) {
-        if (!selectedCells.includes(cell)) {
+        if (!selectedCells.includes(cell) && cell.classList.contains('cell')) {
             cell.classList.add('selected');
             selectedCells.push(cell);
         }
