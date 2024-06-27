@@ -96,7 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
- // Fill empty cells with random letters
+
+    // Fill empty cells with random letters
     function fillEmptyCells() {
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (let i = 0; i < boardSize * boardSize; i++) {
@@ -107,12 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
     // Start selecting cells
     function startSelection(event) {
         isSelecting = true;
         selectedCells = [];
         selectCell(event.target);
-     }
+    }
 
     // Continue selecting cells
     function continueSelection(event) {
@@ -123,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // End selecting cells
     function endSelection() {
-         isSelecting = false;
+        isSelecting = false;
         checkSelectedWord();
     }
 
@@ -138,14 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if the selected cells form a valid word
     function checkSelectedWord() {
         const selectedWord = selectedCells.map(cell => cell.textContent).join('');
-            if (words.includes(selectedWord)) {
-                selectedCells.forEach(cell => cell.classList.add('found'));
-            } else {
-                selectedCells.forEach(cell => cell.classList.remove('selected'));
-            }
-                selectedCells = [];
-    }
+        const selectedWordReversed = selectedCells.map(cell => cell.textContent).reverse().join('');
 
+        if (words.includes(selectedWord) || words.includes(selectedWordReversed)) {
+            selectedCells.forEach(cell => {
+                cell.classList.add('found');
+                cell.classList.remove('selected');
+            });
+        } else {
+            selectedCells.forEach(cell => cell.classList.remove('selected'));
+        }
+        selectedCells = [];
+    }
 
     initGame();
 });
