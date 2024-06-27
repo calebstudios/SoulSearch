@@ -153,3 +153,27 @@ body {
         font-size: 6vw;
     }
 }
+
+/* CSS for the animations and effects */
+@keyframes highlight {
+    0% { background-color: #d0ffd0; }
+    50% { background-color: #80ff80; }
+    100% { background-color: #d0ffd0; }
+}
+
+.cell.selected {
+    background-color: #d0ffd0;
+    animation: highlight 1s infinite;
+}
+
+.cell.correct {
+    background-color: #80ff80;
+    animation: none;
+}
+
+.word.correct {
+    background-color: #80ff80;
+    animation: highlight 1s infinite;
+}
+
+
