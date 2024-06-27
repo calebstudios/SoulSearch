@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const wordList = document.getElementById('word-list');
     let isSelecting = false;
     let selectedCells = [];
+    let startCell = null;
+    let direction = null;
 
     // Create the game board
     function createBoard(size) {
@@ -113,13 +115,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function startSelection(event) {
         isSelecting = true;
         selectedCells = [];
+        startCell = event.target;
+        direction = null;
         selectCell(event.target);
     }
 
     // Continue selecting cells
     function continueSelection(event) {
-        if (isSelecting) {
-            selectCell(event.target);
+        if (isSelecting && startCell) {
+            const cell = event.target;
+            if (!direction) {
+                direction = determineDirection(startCell, cell);
+            }
+            if (isValidSelection(cell)) {
+                selectCell(cell);
+            }
         }
     }
 
@@ -151,6 +161,40 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedCells.forEach(cell => cell.classList.remove('selected'));
         }
         selectedCells = [];
+    }
+
+    // Determine the direction of the selection
+    function determineDirection(start, end) {
+        const startIdx = Array.prototype.indexOf.call(board.children, start);
+        const endIdx = Array.prototype.indexOf.call(board.children, end);
+
+        const startRow = Math.floor(startIdx / boardSize);
+        const startCol = startIdx % boardSize;
+        const endRow = Math.floor(endIdx / boardSize);
+        const endCol = endIdx % boardSize;
+
+        if (startRow === endRow) {
+            return 'horizontal';
+        } else if (startCol === endCol) {
+            return 'vertical';
+        }
+        return null;
+    }
+
+    // Validate the selection
+    function isValidSelection(cell) {
+        const lastCell = selectedCells[selectedCells.length - 1];
+        if (!lastCell) return true;
+
+        const lastIdx = Array.prototype.indexOf.call(board.children, lastCell);
+        const cellIdx = Array.prototype.indexOf.call(board.children, cell);
+
+        if (direction === 'horizontal') {
+            return Math.floor(lastIdx / boardSize) === Math.floor(cellIdx / boardSize);
+        } else if (direction === 'vertical') {
+            return lastIdx % boardSize === cellIdx % boardSize;
+        }
+        return false;
     }
 
     initGame();
