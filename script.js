@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         createBoard(boardSize);
         displayWords(words);
         placeWords(words);
+        fillEmptyCells();
     }
 
     // Place words on the board
@@ -90,6 +91,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+ // Fill empty cells with random letters
+    function fillEmptyCells() {
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for (let i = 0; i < boardSize * boardSize; i++) {
+            const cell = board.children[i];
+            if (cell.textContent === '') {
+                const randomLetter = letters.charAt(Math.floor(Math.random() * letters.length));
+                cell.textContent = randomLetter;
+            }
+        }
+    }
 
+    initGame();
+});
     initGame();
 });
