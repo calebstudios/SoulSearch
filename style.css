@@ -2,6 +2,8 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
 }
 
 #game-container {
@@ -9,32 +11,121 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 20px;
 }
 
 #board {
     display: grid;
-    grid-template-columns: repeat(10, 30px);
+    grid-template-columns: repeat(10, 1fr);
     gap: 5px;
     margin: 20px 0;
+    width: 100%;
+    max-width: 600px;
 }
 
 .cell {
-    width: 30px;
-    height: 30px;
+    width: 100%;
+    padding-top: 100%; /* Creates a square cell */
+    position: relative;
     background-color: #fff;
     border: 1px solid #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
     user-select: none;
 }
 
+.cell::before {
+    content: attr(data-letter);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2vw;
+}
+
 #word-list {
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 600px;
 }
 
 .word {
     margin: 5px;
+    padding: 5px 10px;
+    background-color: #ddd;
+    border-radius: 5px;
     font-weight: bold;
+    font-size: 2vw;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 1200px) {
+    .cell::before {
+        font-size: 2.5vw;
+    }
+
+    .word {
+        font-size: 2.5vw;
+    }
+}
+
+@media (max-width: 1000px) {
+    .cell::before {
+        font-size: 3vw;
+    }
+
+    .word {
+        font-size: 3vw;
+    }
+}
+
+@media (max-width: 800px) {
+    .cell::before {
+        font-size: 3.5vw;
+    }
+
+    .word {
+        font-size: 3.5vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .cell::before {
+        font-size: 4vw;
+    }
+
+    .word {
+        font-size: 4vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .cell::before {
+        font-size: 4.5vw;
+    }
+
+    .word {
+        font-size: 4.5vw;
+    }
+}
+
+@media (max-width: 400px) {
+    .cell::before {
+        font-size: 5vw;
+    }
+
+    .word {
+        font-size: 5vw;
+    }
+}
+
+@media (max-width: 300px) {
+    .cell::before {
+        font-size: 6vw;
+    }
+
+    .word {
+        font-size: 6vw;
+    }
 }
