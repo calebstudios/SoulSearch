@@ -1,22 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const boardSize = 10;
     const words = [
-        "arse", "arsehead", "arsehole", "ass", "ass hole", "asshole",
-        "bastard", "bitch", "bloody", "bollocks", "brotherfucker", "bugger", "bullshit",
-        "child-fucker", "Christ on a bike", "Christ on a cracker", "cock", "cocksucker", "crap", "cunt",
-        "dammit", "damn", "damn it", "damned", "dick", "dick-head", "dickhead", "dumb ass", "dumb-ass", "dumbass", "dyke",
-        "father-fucker", "fatherfucker", "frigger", "fuck", "fucker", "fucking",
-        "god dammit", "God damn", "god damn", "goddammit", "goddamn", "Goddamn", "goddamned", "goddamnit", "godsdamn",
-        "hell", "holy shit", "horseshit",
-        "in shit",
-        "jack-ass", "jackarse", "jackass", "Jesus Christ", "Jesus fuck", "Jesus H. Christ", "Jesus Harold Christ", "Jesus, Mary and Joseph", "Jesus wept",
-        "kike",
-        "mother fucker", "mother-fucker", "motherfucker",
-        "nigga", "nigra",
-        "pigfucker", "piss", "prick", "pussy",
-        "shit", "shit ass", "shite", "sibling fucker", "sisterfuck", "sisterfucker", "slut", "son of a whore", "son of a bitch", "spastic", "sweet Jesus",
-        "twat",
-        "wanker"
+        "JAVASCRIPT",
+        "HTML",
+        "CSS",
+        "PYTHON",
+        "JAVA",
+        "RUBY",
+        "SWIFT",
+        "KOTLIN",
+        "REACT",
+        "ANGULAR"
     ];
 
     const board = document.getElementById('board');
@@ -27,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < size * size; i++) {
             const cell = document.createElement('div');
             cell.classList.add('cell');
-            cell.textContent = '';
+            cell.setAttribute('data-letter', '');
             board.appendChild(cell);
         }
     }
