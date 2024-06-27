@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const board = document.getElementById('board');
     const wordList = document.getElementById('word-list');
+    let isSelecting = false;
+    let selectedCells = [];
 
     // Create the game board
     function createBoard(size) {
@@ -22,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const cell = document.createElement('div');
             cell.classList.add('cell');
             cell.setAttribute('data-letter', '');
+            cell.addEventListener('mousedown', startSelection);
+            cell.addEventListener('mouseover', continueSelection);
+            cell.addEventListener('mouseup', endSelection);
             board.appendChild(cell);
         }
     }
@@ -102,6 +107,45 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+    // Start selecting cells
+    function startSelection(event) {
+        isSelecting = true;
+        selectedCells = [];
+        selectCell(event.target);
+     }
+
+    // Continue selecting cells
+    function continueSelection(event) {
+        if (isSelecting) {
+            selectCell(event.target);
+        }
+    }
+
+    // End selecting cells
+    function endSelection() {
+         isSelecting = false;
+        checkSelectedWord();
+    }
+
+    // Select a cell
+    function selectCell(cell) {
+        if (!selectedCells.includes(cell)) {
+            cell.classList.add('selected');
+            selectedCells.push(cell);
+        }
+    }
+
+    // Check if the selected cells form a valid word
+    function checkSelectedWord() {
+        const selectedWord = selectedCells.map(cell => cell.textContent).join('');
+            if (words.includes(selectedWord)) {
+                selectedCells.forEach(cell => cell.classList.add('found'));
+            } else {
+                selectedCells.forEach(cell => cell.classList.remove('selected'));
+            }
+                selectedCells = [];
+    }
+
 
     initGame();
 });
