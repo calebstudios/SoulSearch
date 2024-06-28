@@ -1,7 +1,19 @@
+:root {
+    --primary-bg: #f0f0f0;
+    --cell-bg: #fff;
+    --cell-border: #ccc;
+    --cell-hover-bg: #e0e0e0;
+    --selected-bg: #d0ffd0;
+    --found-bg: lightgreen;
+    --highlight-bg: #80ff80;
+    --word-bg: #ddd;
+    --font-size: 2vw;
+}
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f0f0f0;
+    background-color: var(--primary-bg);
     margin: 0;
     padding: 0;
 }
@@ -30,27 +42,28 @@ body {
     width: 100%;
     padding-top: 100%; /* Creates a square cell */
     position: relative;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: var(--cell-bg);
+    border: 1px solid var(--cell-border);
     cursor: pointer;
     user-select: none;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 .cell:hover {
-    background-color: #e0e0e0;
+    background-color: var(--cell-hover-bg);
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Add these styles below */
 .cell.selected {
-    background-color: yellow;
+    background-color: var(--selected-bg);
+    animation: highlight 1s infinite;
 }
 
 .cell.found {
-    background-color: lightgreen;
+    background-color: var(--found-bg);
 }
+
 /* End of new styles */
 
 .cell.selected {
@@ -63,7 +76,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2vw;
+    font-size: var(--font-size);
 }
 
 #word-list {
@@ -77,88 +90,59 @@ body {
 .word {
     margin: 5px;
     padding: 5px 10px;
-    background-color: #ddd;
+    background-color: var(--word-bg);
     border-radius: 5px;
     font-weight: bold;
-    font-size: 2vw;
+    font-size: var(--font-size);
 }
 
 /* Media queries for smaller screens */
 @media (max-width: 1200px) {
-    .cell::before {
-        font-size: 2.5vw;
-    }
-
-    .word {
-        font-size: 2.5vw;
+    :root {
+        --font-size: 2.5vw;
     }
 }
 
 @media (max-width: 1000px) {
-    .cell::before {
-        font-size: 3vw;
-    }
-
-    .word {
-        font-size: 3vw;
+    :root {
+        --font-size: 3vw;
     }
 }
 
 @media (max-width: 800px) {
-    .cell::before {
-        font-size: 3.5vw;
-    }
-
-    .word {
-        font-size: 3.5vw;
+    :root {
+        --font-size: 3.5vw;
     }
 }
 
 @media (max-width: 600px) {
-    .cell::before {
-        font-size: 4vw;
-    }
-
-    .word {
-        font-size: 4vw;
+    :root {
+        --font-size: 4vw;
     }
 }
 
 @media (max-width: 500px) {
-    .cell::before {
-        font-size: 4.5vw;
-    }
-
-    .word {
-        font-size: 4.5vw;
+    :root {
+        --font-size: 4.5vw;
     }
 }
 
 @media (max-width: 400px) {
-    .cell::before {
-        font-size: 5vw;
-    }
-
-    .word {
-        font-size: 5vw;
+    :root {
+        --font-size: 5vw;
     }
 }
 
 @media (max-width: 300px) {
-    .cell::before {
-        font-size: 6vw;
-    }
-
-    .word {
-        font-size: 6vw;
+    :root {
+        --font-size: 6vw;
     }
 }
 
 /* CSS for the animations and effects */
 @keyframes highlight {
-    0% { background-color: #d0ffd0; }
-    50% { background-color: #80ff80; }
-    100% { background-color: #d0ffd0; }
+    0%, 100% { background-color: var(--selected-bg); }
+    50% { background-color: var(--highlight-bg); }
 }
 
 .cell.selected {
