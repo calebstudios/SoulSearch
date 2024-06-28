@@ -8,14 +8,27 @@
     --highlight-bg: #80ff80;
     --word-bg: #ddd;
     --font-size: 2vw;
+    --primary-color: #2977ab;
+    --secondary-color: #2ecc71;
+    --text-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --gradient-bg: linear-gradient(135deg, #6e8efb, #a777e3);
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     text-align: center;
-    background-color: var(--primary-bg);
+    background: var(--gradient-bg);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
+}
+
+h1 {
+    font-size: 3em;
+    margin: 20px 0;
+    color: var(--primary-color);
+    text-shadow: 1px 1px 2px var(--shadow-color);
 }
 
 #game-container {
@@ -27,6 +40,9 @@ body {
     width: 100%;
     max-width: 800px;
     margin: auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow-color);
 }
 
 #board {
@@ -47,12 +63,13 @@ body {
     cursor: pointer;
     user-select: none;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    border-radius: 5px;
 }
 
 .cell:hover {
     background-color: var(--cell-hover-bg);
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .cell.selected {
@@ -79,6 +96,7 @@ body {
     font-size: var(--font-size);
 }
 
+
 #word-list {
     margin-top: 20px;
     display: flex;
@@ -87,13 +105,22 @@ body {
     max-width: 600px;
 }
 
+
 .word {
     margin: 5px;
-    padding: 5px 10px;
+    padding: 10px 15px;
     background-color: var(--word-bg);
-    border-radius: 5px;
+    border-radius: 20px;
     font-weight: bold;
     font-size: var(--font-size);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.word.correct {
+    background-color: var(--secondary-color);
+    color: #fff;
+    animation: highlight 1s infinite;
 }
 
 /* Media queries for smaller screens */
