@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cell.classList.add('cell');
             cell.setAttribute('data-letter', '');
             cell.addEventListener('mousedown', startSelection);
-            cell.addEventListener('mouseover', continueSelection);
+            cell.addEventListener('mouseover', debounce(continueSelection, 10)); // Add debounce to avoid rapid firing
             cell.addEventListener('mouseup', endSelection);
             board.appendChild(cell);
         }
@@ -190,11 +190,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const cellIdx = Array.prototype.indexOf.call(board.children, cell);
 
         if (direction === 'horizontal') {
-            return Math.floor(lastIdx / boardSize) === Math.floor(cellIdx / boardSize);
+            return Math.floor(lastIdx / boardSize) === Math.floor(cellIdx / boardSize) && Math.abs(lastIdx - cellIdx) === 1;
         } else if (direction === 'vertical') {
-            return lastIdx % boardSize === cellIdx % boardSize;
+            return lastIdx % boardSize === cellIdx % boardSize && Math.abs(lastIdx - cellIdx) === boardSize;
         }
         return false;
+    }
+
+    // Debounce function to prevent rapid event firing
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+        };
     }
 
     initGame();
