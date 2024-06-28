@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cell.classList.add('cell');
             cell.setAttribute('data-letter', '');
             cell.addEventListener('mousedown', startSelection);
-            cell.addEventListener('mouseover', debounce(continueSelection, 10)); // Add debounce to avoid rapid firing
+            cell.addEventListener('mouseover', continueSelection);
             cell.addEventListener('mouseup', endSelection);
             board.appendChild(cell);
         }
@@ -195,16 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return lastIdx % boardSize === cellIdx % boardSize && Math.abs(lastIdx - cellIdx) === boardSize;
         }
         return false;
-    }
-
-    // Debounce function to prevent rapid event firing
-    function debounce(func, wait) {
-        let timeout;
-        return function(...args) {
-            const context = this;
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(context, args), wait);
-        };
     }
 
     initGame();
