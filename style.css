@@ -1,30 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@300;400;700&display=swap');
+
 :root {
-    --primary-bg: #f0f0f0;
+    --primary-bg: #ffeb3b;
     --cell-bg: #fff;
-    --cell-border: #ccc;
-    --cell-hover-bg: #e0e0e0;
-    --selected-bg: #d0ffd0;
-    --found-bg: lightgreen;
-    --highlight-bg: #80ff80;
-    --word-bg: #ddd;
+    --cell-border: #ff5722;
+    --cell-hover-bg: #ffe0b2;
+    --selected-bg: #ffd600;
+    --found-bg: #ff9800;
+    --highlight-bg: #ffeb3b;
+    --word-bg: #ffcc80;
     --font-size: 2vw;
-    --primary-color: #2977ab;
-    --secondary-color: #2ecc71;
-    --text-color: #333;
+    --primary-color: #ff4081;
+    --secondary-color: #00e676;
+    --text-color: #4a148c;
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --gradient-bg: linear-gradient(135deg, #6e8efb, #a777e3);
+    --gradient-bg: linear-gradient(135deg, rgba(255, 111, 0, 0.60), rgba(255, 64, 129, 0.60));
 }
 
 body {
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: 'Nunito', 'Roboto', Arial, sans-serif;
     text-align: center;
-    background: var(--gradient-bg);
+    background: var(--gradient-bg), url('memphis-mini.png');
+    background-size: cover, cover;
     color: var(--text-color);
     margin: 0;
     padding: 0;
 }
 
 h1 {
+    font-family: 'Fredoka One', cursive;
     font-size: 3em;
     margin: 20px 0;
     color: var(--primary-color);
